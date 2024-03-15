@@ -23,4 +23,8 @@ public class User {
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{6,}$",
     message = "Password must be at least 6 characters long and contain at least one lowercase letter, one uppercase letter, and one digit.")
     private String password;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private Session session;
+
 }

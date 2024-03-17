@@ -15,7 +15,8 @@ public class Session {
     private Long id;
 
     @NotNull
-    @OneToOne(mappedBy = "user")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @NotNull

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-class LocationService {
+public class LocationService {
     private final LocationRepository locationRepository;
 
     @Autowired

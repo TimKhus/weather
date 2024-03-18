@@ -21,9 +21,8 @@ public class Location {
     private String name;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private Long userId;
 
     @NotNull
     @Column(name = "latitude", precision = 10, scale = 8)

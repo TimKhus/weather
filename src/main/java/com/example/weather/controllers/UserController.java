@@ -42,8 +42,7 @@ public class UserController {
             return new ResponseEntity<>("UserDTO is null", HttpStatus.BAD_REQUEST);
         }
 
-        if (userDTO.getEmail().isEmpty() || userDTO.getEmail() == null || userDTO.getPassword().isEmpty()
-                || userDTO.getPassword() == null) {
+        if (userDTO.getEmail().isEmpty() ||  userDTO.getPassword().isEmpty()) {
             return new ResponseEntity<>("Email and password are required fields", HttpStatus.BAD_REQUEST);
         }
 

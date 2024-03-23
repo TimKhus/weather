@@ -25,11 +25,10 @@ public class Location {
     private Long userId;
 
     @NotNull
-    @Column(name = "latitude", precision = 10, scale = 8)
-    private BigDecimal latitude;
+    @Column(name = "longitude")
+    private Double longitude;
 
     @NotNull
-    @Column(name = "longitude", precision = 11, scale = 8)
-    private BigDecimal longitude;
-
+    @Column(name = "latitude")
+    private Double latitude;
 }

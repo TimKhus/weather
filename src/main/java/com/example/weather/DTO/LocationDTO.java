@@ -14,8 +14,9 @@ public class LocationDTO {
     private Long userId;
 
     @NotNull
-    private BigDecimal latitude;
+    private Double longitude;
 
     @NotNull
-    private BigDecimal longitude;
+    private Double latitude;
+
 }

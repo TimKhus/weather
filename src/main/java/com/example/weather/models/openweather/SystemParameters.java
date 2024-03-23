@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SystemParameters {
-    private String countryCode;
-    private long sunriseTime;
-    private long sunsetTime;
+    private String country;
+    private long sunrise;
+    private long sunset;
 }

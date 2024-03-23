@@ -4,10 +4,12 @@ import lombok.Data;
 
 @Data
 public class MainParameters {
-    private double temperature;
-    private double feelsLike;
+    private double temp;
+    private double feels_like;
+    private double temp_min;
+    private double temp_max;
     private int pressure;
     private int humidity;
-    private int seaLevel;
-    private int groundLevel;
+    private int sea_level;
+    private int grnd_level;
 }

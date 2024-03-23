@@ -3,6 +3,7 @@ package com.example.weather.controllers;
 import com.example.weather.DTO.SessionDTO;
 import com.example.weather.models.Session;
 import com.example.weather.services.SessionService;
+import com.example.weather.services.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,10 +17,12 @@ import java.util.List;
 public class SessionController {
 
     private final SessionService sessionService;
+    private final UserService userService;
 
     @Autowired
-    SessionController(SessionService sessionService) {
+    SessionController(SessionService sessionService, UserService userService) {
         this.sessionService = sessionService;
+        this.userService = userService;
     }
 
     @GetMapping(path = "/sessions")
@@ -47,7 +50,8 @@ public class SessionController {
         }
 
         Session sessionToSave = new Session();
-        sessionToSave.setUserId(sessionDTO.getUserId());
+        sessionToSave.setUser(userService.getUserById(sessionDTO.getUserId()).orElseThrow(
+                () -> new EntityNotFoundException(String.format("No user with id %d", sessionDTO.getUserId()))));
         sessionToSave.setExpirationTime(sessionDTO.getExpirationTime());
         sessionService.saveSession(sessionToSave);
         return new ResponseEntity<>(sessionToSave, HttpStatus.CREATED);
@@ -58,7 +62,7 @@ public class SessionController {
         Session sessionToDelete = sessionService.getSessionById(sessionId)
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Session with id %d not found", sessionId)));
-        Long userId = sessionToDelete.getUserId();
+        Long userId = sessionToDelete.getUser().getId();
         sessionService.deleteSession(sessionId);
         return new ResponseEntity<>("Session with user ID " + userId + "deleted successfully", HttpStatus.OK);
     }

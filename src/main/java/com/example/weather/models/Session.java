@@ -15,8 +15,9 @@ public class Session {
     private Long id;
 
     @NotNull
-    @Column(name = "user_id")
-    private Long userId;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @NotNull
     @Column(name = "expiration_time")

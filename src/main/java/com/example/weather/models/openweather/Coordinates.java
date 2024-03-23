@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Coordinates {
-    private Double longitude;
-    private Double latitude;
+    private Double lon;
+    private Double lat;
+
 }

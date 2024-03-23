@@ -31,7 +31,7 @@ public class SessionService {
     public String deleteSession(Long sessionId) {
         Session sessionToDelete = sessionRepository.findById(sessionId).orElseThrow();
         String deleteMessage = String.format("Session with Id %d and User Id %d was successfully deleted",
-                sessionId, sessionToDelete.getUserId());
+                sessionId, sessionToDelete.getUser().getId());
         sessionRepository.delete(sessionToDelete);
         return deleteMessage;
     }

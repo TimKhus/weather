@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class WeatherData {
-    private Coordinates coordinates;
-    private Weather[] weatherArray;
+    private Coordinates coord;
+    private Weather[] weather;
     private MainParameters main;
     private int visibility;
     private Wind wind;

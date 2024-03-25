@@ -1,6 +1,7 @@
 package com.example.weather.controllers;
 
 import com.example.weather.models.Location;
+import com.example.weather.models.openweather.SearchResult;
 import com.example.weather.models.openweather.WeatherData;
 import com.example.weather.services.LocationService;
 import com.example.weather.services.WeatherApiClient;
@@ -12,10 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 @Controller
 public class WeatherApiController {
     private final WeatherApiClient weatherApiClient;
     private final LocationService locationService;
+
     @Autowired
     WeatherApiController(WeatherApiClient weatherApiClient, LocationService locationService) {
         this.weatherApiClient = weatherApiClient;
@@ -23,11 +27,16 @@ public class WeatherApiController {
     }
 
     @GetMapping(path = "/api/weather/{locationId}")
-public ResponseEntity<WeatherData> getWeatherData(@PathVariable Long locationId) {
+    public ResponseEntity<WeatherData> getWeatherData(@PathVariable Long locationId) {
         Location location = locationService.getLocationById(locationId).orElseThrow(() -> new EntityNotFoundException(
                 String.format("Location with id %d not found", locationId)));
         WeatherData weatherData = weatherApiClient.getWeatherData(location);
         return new ResponseEntity<>(weatherData, HttpStatus.OK);
+    }
+
+        @GetMapping(path = "/api/location/find/{locationName}")
+    public ResponseEntity<List<SearchResult>> getLocationsByName(@PathVariable String locationName) {
+        return weatherApiClient.getAllLocations(locationName);
     }
 
 }

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+<h1>Search Results</h1>
+<ul>
+    <!-- Вывод результатов поиска -->
+    <th:block th:each="locationDTO : ${searchResults}">
+        <li>
+            <p>City: <span th:text="${locationDTO.name}"></span></p>
+            <p>Latitude: <span th:text="${locationDTO.latitude}"></span></p>
+            <p>Longitude: <span th:text="${locationDTO.longitude}"></span></p>
+            <!-- Кнопка "Сохранить" для сохранения местоположения -->
+            <form th:action="@{/location}" method="post">
+                <input type="hidden" name="name" th:value="${locationDTO.name}">
+                <input type="hidden" name="userId" th:value="${locationDTO.userId}">
+                <input type="hidden" name="latitude" th:value="${locationDTO.latitude}">
+                <input type="hidden" name="longitude" th:value="${locationDTO.longitude}">
+                <button type="submit">Save</button>
+            </form>
+        </li>
+    </th:block>
+</ul>
+</body>
+</html>

@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 public class WeatherApiClient {
-        private final String apiUrl = "https://api.openweathermap.org/";
+    private final String apiUrl = "https://api.openweathermap.org/";
     private final String apiKey = "655628e636e79e03375daf04372ebe26";
 
     private final RestTemplate restTemplate;
@@ -31,7 +31,7 @@ public class WeatherApiClient {
         return restTemplate.getForObject(url, WeatherData.class);
     }
 
-    public ResponseEntity<List<SearchResult>> getAllLocations(String locationName) {
+    public ResponseEntity<List<SearchResult>> getLocationByName(String locationName) {
         String url = apiUrl + "geo/1.0/direct?q=" + locationName + "&limit=3&appid=" + apiKey;
         ResponseEntity<SearchResult[]> responseEntity = restTemplate.exchange(
                 url,
